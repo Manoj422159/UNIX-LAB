@@ -1,0 +1,16 @@
+﻿student@student:~/Desktop/422159/unix/week 6$ ls
+fibonacci.c  functions.h  main.c  prime.c
+student@student:~/Desktop/422159/unix/week 6$ gcc -c fibonacci.c -o fibonacci_obj.o
+student@student:~/Desktop/422159/unix/week 6$ gcc -c prime.c -o prime_obj.o
+student@student:~/Desktop/422159/unix/week 6$ gcc -c main.c -o main_obj.o
+student@student:~/Desktop/422159/unix/week 6$ ar rcs eg_static.a fibonacci_obj.o prime_obj.o
+student@student:~/Desktop/422159/unix/week 6$ ls
+eg_static.a  fibonacci.c  fibonacci_obj.o  functions.h  main.c  main_obj.o  prime.c  prime_obj.o
+student@student:~/Desktop/422159/unix/week 6$ gcc -o main_result main_obj.o -L. eg_static.a
+student@student:~/Desktop/422159/unix/week 6$ ./main_result
+Fibonacci of 10 is 55
+13 is a prime number
+student@student:~/Desktop/422159/unix/week 6$ ls
+eg_static.a  fibonacci.c  fibonacci_obj.o  functions.h  main.c  main_obj.o  main_result  prime.c  prime_obj.o
+student@student:~/Desktop/422159/unix/week 6$ 
+student@student:~/Desktop/422159/unix/week 6$ ^C

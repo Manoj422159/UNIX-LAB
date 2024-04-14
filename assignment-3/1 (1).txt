@@ -1,0 +1,32 @@
+﻿student@student:~/Desktop/422159/unix/week 6$ ls
+eg_static.a  fibonacci.c  fibonacci_obj.o  functions.h  main.c  main_obj.o  main_result  prime.c  prime_obj.o  static.txt
+student@student:~/Desktop/422159/unix/week 6$ gcc *.o -shared -o eg_dynamic.so
+student@student:~/Desktop/422159/unix/week 6$ ls
+eg_dynamic.so  eg_static.a  fibonacci.c  fibonacci_obj.o  functions.h  main.c  main_obj.o  main_result  prime.c  prime_obj.o  static.txt
+student@student:~/Desktop/422159/unix/week 6$ gcc -o main_result main_obj.o -L. eg_dynamic.so
+student@student:~/Desktop/422159/unix/week 6$ ./main_result
+./main_result: error while loading shared libraries: eg_dynamic.so: cannot open shared object file: No such file or directory
+student@student:~/Desktop/422159/unix/week 6$ sudo cp eg_dynamic.so /usr/lib
+[sudo] password for student: 
+student@student:~/Desktop/422159/unix/week 6$ ./main_result
+Fibonacci of 10 is 55
+13 is a prime number
+student@student:~/Desktop/422159/unix/week 6$ sudo rm /usr/lib/eg_dynamic.so
+student@student:~/Desktop/422159/unix/week 6$ pwd
+/home/student/Desktop/422159/unix/week 6
+student@student:~/Desktop/422159/unix/week 6$ export LD_LIBRARY_PATH=
+student@student:~/Desktop/422159/unix/week 6$ export LD_LIBRARY_PATH=:/home/student/Desktop/422159/unix/week 6
+bash: export: `6': not a valid identifier
+student@student:~/Desktop/422159/unix/week 6$ export LD_LIBRARY_PATH=:/home/student/Desktop/422159/unix
+student@student:~/Desktop/422159/unix/week 6$ ./main_result
+Fibonacci of 10 is 55
+13 is a prime number
+student@student:~/Desktop/422159/unix/week 6$ ls
+eg_dynamic.so  eg_static.a  fibonacci.c  fibonacci_obj.o  functions.h  main.c  main_obj.o  main_result  prime.c  prime_obj.o  static.txt
+student@student:~/Desktop/422159/unix/week 6$ 
+student@student:~/Desktop/422159/unix/week 6$ ldd main_result
+        linux-vdso.so.1 (0x00007ffc4c3e9000)
+        eg_dynamic.so (0x00007fb677e8e000)
+        libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fb677c84000)
+        /lib64/ld-linux-x86-64.so.2 (0x00007fb677e9a000)
+student@student:~/Desktop/422159/unix/week 6$
